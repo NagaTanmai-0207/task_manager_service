@@ -7,6 +7,7 @@ from typing import List, Optional
 from datetime import datetime
 from uuid import UUID
 from app.core.exceptions import AppException
+from app.core.logger import logger
 router = APIRouter()
 
 
@@ -17,7 +18,9 @@ def get_health():
 
 @router.post("/tasks", status_code=201)
 def create_task_route(task: TaskCreate, db: Session = Depends(get_db)):
+    logger.debug("Creating new task")
     new_task = create_task(db, task)
+    logger.debug(f"Task created with id: {new_task.id}")
     return new_task
 
 
@@ -53,6 +56,7 @@ def get_tasks(
 
 @router.patch("/tasks/{task_id}")
 def update_task_by_id(task_id: UUID, task: TaskUpdate, db: Session = Depends(get_db)):
+    logger.debug(f"Updating task with id: {task_id}")
     updated_task = update_task(db, task_id, task)
     if not updated_task:
         raise AppException(
@@ -60,11 +64,13 @@ def update_task_by_id(task_id: UUID, task: TaskUpdate, db: Session = Depends(get
             message="Task not found",
             status_code=404
         )
+    logger.debug(f"Task updated successfully: {updated_task.id}")
     return updated_task
 
 
 @router.delete("/tasks/{task_id}", status_code=204)
 def delete_task_by_id(task_id, db: Session = Depends(get_db)):
+    logger.debug(f"Deleting task with id: {task_id}")
     deleted_task = delete_task(db, task_id)
     if not deleted_task:
         raise AppException(
@@ -72,4 +78,5 @@ def delete_task_by_id(task_id, db: Session = Depends(get_db)):
             message="Task not found",
             status_code=404
         )
+    logger.debug(f"Task deleted successfully: {task_id}")
     return

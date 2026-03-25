@@ -1,1 +1,81 @@
-Generic single-database configuration.
+# Task Manager API
+
+A production-ready backend API built using FastAPI, PostgreSQL, and Docker.
+
+---
+
+## Features
+
+- Create, update, delete, and fetch tasks
+- Pagination, filtering, and sorting
+- Custom error handling (consistent JSON format)
+- Logging (request and error logs)
+- Database migrations using Alembic
+- Environment-based configuration
+- Dockerized setup (application + database)
+- Automated testing using pytest
+
+---
+
+## Tech Stack
+
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
+- Alembic
+- Docker & Docker Compose
+- Pytest
+
+---
+
+## Setup & Run
+
+### 1. Clone repository
+
+git clone <your-repo-url>
+cd task_manager
+
+---
+
+### 2. Run with Docker
+
+docker-compose up --build
+
+---
+
+### 3. Access API documentation
+
+http://localhost:8000/docs
+
+---
+
+## Run Tests
+
+python -m pytest -q
+
+---
+
+## Project Structure
+
+task_manager/
+│── app/
+│── tests/
+│── alembic/
+│── main.py
+│── docker-compose.yml
+│── requirements.txt
+
+---
+
+## Key Highlights
+
+- One-command startup using Docker
+- Production-style error handling
+- Clean architecture and modular code
+- Fully tested APIs
+
+---
+
+## Author
+
+Tanmai Arni
